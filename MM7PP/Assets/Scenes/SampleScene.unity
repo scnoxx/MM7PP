@@ -313,8 +313,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.08527382, y: 0.70711124, z: -0.08656085, w: -0.69658405}
-  m_LocalPosition: {x: 15.358071, y: 4.343321, z: 1.9187055}
+  m_LocalRotation: {x: 0.14943424, y: 0.0071186414, z: -0.0010758935, w: 0.98874545}
+  m_LocalPosition: {x: 5.532579, y: 4.1180596, z: -6.1801124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -658,6 +658,7 @@ GameObject:
   - component: {fileID: 865772262}
   - component: {fileID: 865772261}
   - component: {fileID: 865772266}
+  - component: {fileID: 865772267}
   m_Layer: 0
   m_Name: player_temp
   m_TagString: Untagged
@@ -795,7 +796,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0c107a9bc0b9648aa9f26a0472fc38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 40
+  jumpForce: 400
+  moveSpeed: 10
+--- !u!75 &865772267
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865772260}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: -5, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &1523084522
 GameObject:
   m_ObjectHideFlags: 0

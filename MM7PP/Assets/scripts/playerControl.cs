@@ -5,7 +5,8 @@ public class playerControl : MonoBehaviour
     InputAction moveAction;
     InputAction jumpAction;
     Rigidbody rb;
-    public int jumpForce = 40;
+    public int jumpForce = 400;
+    public int moveSpeed = 10;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,9 +22,16 @@ public class playerControl : MonoBehaviour
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
 
-        if (jumpAction.IsPressed()) 
+        rb.AddForce(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed);
+
+        Jump();
+    }
+    private void Jump() 
+    {
+        if (jumpAction.WasPressedThisFrame())
         {
-            rb.AddForce(Vector3.up * jumpForce);         
+            rb.AddForce(Vector3.up * jumpForce);
         }
     }
+    
 }
