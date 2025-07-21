@@ -11,6 +11,10 @@ public class playerControl : MonoBehaviour
     public int moveSpeed = 10;
     public int sprintSpeed = 2;
     public int maxSpeed = 30;
+    public int availableJumps;
+    public float playerHeight;
+    public LayerMask ground;
+    bool grounded;
     
 
 
@@ -27,16 +31,24 @@ public class playerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, ground);
+        if (grounded) 
+        { 
+            availableJumps = 2;
+        }
+        
         Move();
 
         Jump();
     }
     private void Jump() 
     {
-        if (jumpAction.WasPressedThisFrame())
+        if (jumpAction.WasPressedThisFrame() && availableJumps > 0)
         {
+            
             rb.linearVelocity = new Vector3 (rb.linearVelocity.x, 0, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce);
+            availableJumps--;
         }
     }
     
