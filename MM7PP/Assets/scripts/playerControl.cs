@@ -55,10 +55,18 @@ public class playerControl : MonoBehaviour
     private void Move()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        
-        rb.AddForce(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed);
+        Vector3 lookin = new Vector3(moveValue.x, 0, moveValue.y);
 
-        //rb.linearVelocity = new Vector3(moveValue.x * maxSpeed, 0, moveValue.y * maxSpeed);
+
+        rb.AddForce(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed);
+        rb.transform.rotation = Quaternion.LookRotation(lookin, Vector3.up);
+        if (Vector3.Dot(rb.linearVelocity, lookin) < 0.95) 
+        {
+            //rb.linearVelocity *= 0.9f;
+            rb.AddForce(moveValue.x * moveSpeed * 3, 0, moveValue.y * moveSpeed * 3);
+        }
+
+        //rb.linearVelocity = new Vector3(moveValue.x * maxSpeed, 0, moveValue.y * maxSpeed); 
         
         
 
