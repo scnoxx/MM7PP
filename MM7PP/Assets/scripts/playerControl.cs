@@ -55,7 +55,13 @@ public class playerControl : MonoBehaviour
     private void Move()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        
         rb.AddForce(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed);
+
+        //rb.linearVelocity = new Vector3(moveValue.x * maxSpeed, 0, moveValue.y * maxSpeed);
+        
+        
+
     }
    
 
