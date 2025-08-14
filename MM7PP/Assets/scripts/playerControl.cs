@@ -15,8 +15,12 @@ public class playerControl : MonoBehaviour
     public float playerHeight;
     public LayerMask ground;
     bool grounded;
-    
-
+    public int rotationSpeed = 7;
+    /*
+    public Transform orientation;
+    public Transform playerObj;
+    public Transform player;
+    */
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,6 +35,10 @@ public class playerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
+        
+        
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, ground);
         if (grounded) 
         { 
@@ -54,19 +62,32 @@ public class playerControl : MonoBehaviour
     
     private void Move()
     {
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        Vector3 lookin = new Vector3(moveValue.x, 0, moveValue.y);
+        //Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+        //orientation.forward = viewDir.normalized;
 
+
+        Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        Vector3 velocityDirection = new Vector3(moveValue.x, 0, moveValue.y);
+        /*float verticalInput = moveValue.y;
+        float horizontalInput = moveValue.x;
+
+        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        if (inputDir != Vector3.zero) 
+        {
+            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+        }
+        */
 
         rb.AddForce(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed);
-        rb.transform.rotation = Quaternion.LookRotation(lookin, Vector3.up);
-        if (Vector3.Dot(rb.linearVelocity, lookin) < 0.95) 
+        
+        if (Vector3.Dot(rb.linearVelocity, velocityDirection) < 0.95) 
         {
             //rb.linearVelocity *= 0.9f;
             rb.AddForce(moveValue.x * moveSpeed * 3, 0, moveValue.y * moveSpeed * 3);
         }
 
-        //rb.linearVelocity = new Vector3(moveValue.x * maxSpeed, 0, moveValue.y * maxSpeed); 
+         
         
         
 
